@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  root: './',  // Ensures Vite looks for the index.html at the root
+  plugins: [react()],
   build: {
-    outDir: 'dist', // Default build folder
+    outDir: 'dist', // This should match the "publish" folder in Netlify
   },
 });
+
