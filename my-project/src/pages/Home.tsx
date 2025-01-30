@@ -11,8 +11,7 @@ const Home: React.FC = () => {
           Welcome to My Portfolio
         </h1>
         <p
-          className="text-lg text-gray-700 mb-8 animate-fade-in"
-          style={styles}
+          className={`text-lg text-gray-700 mb-8 animate-fade-in ${styles.textLg} `}
         >
           I'm a Front-End Developer skilled in building responsive,
           user-friendly websites using React.js, Tailwind CSS, and modern web

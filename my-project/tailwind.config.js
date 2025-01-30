@@ -1,24 +1,19 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}", // Adjust based on your project structure
+  ],
   theme: {
     extend: {
-      keyframes: {
-        "fade-in": {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-      },
       animation: {
-        "fade-in": "fade-in 1s ease-out",
+        "fade-in": "fadeIn 1s ease-in-out",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
       },
     },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [],
-  daisyui: {
-    themes: ["light", "dark", "cupcake"],
-  },
 };
