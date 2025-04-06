@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Linkedin, Github, Twitter, FileDown } from "lucide-react";
 
 const About: React.FC = () => {
   const [showMore, setShowMore] = useState(false);
@@ -13,11 +14,12 @@ const About: React.FC = () => {
         <img
           src="https://avatars.githubusercontent.com/u/148393487?v=4"
           alt="Profile"
-          className="h-32 w-32 rounded-full mx-auto"
+          className="h-32 w-32 rounded-full mx-auto shadow-lg"
         />
         <h2 className="text-3xl font-bold mt-4">About Me</h2>
       </div>
-      <p className="text-lg text-gray-700 mb-4">
+
+      <p className="text-lg text-gray-700 mb-4 transition-all duration-300">
         I'm a Front-End Developer skilled in building responsive, user-friendly
         websites using React.js, Tailwind CSS, and modern web practices. With a
         passion for creating interactive and seamless user experiences, I aim to
@@ -33,6 +35,7 @@ const About: React.FC = () => {
         project with a meticulous attention to detail, ensuring a balance
         between aesthetics and functionality.
       </p>
+
       {showMore && (
         <div className="showmore">
           <p className="text-lg text-gray-700 mb-4">
@@ -53,74 +56,75 @@ const About: React.FC = () => {
           </p>
         </div>
       )}
-      <button
-        onClick={toggleShowMore}
-        className="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        {showMore ? "Show Less" : "Show More"}
-      </button>
+
+      <div className="flex justify-center my-6">
+        <button
+          onClick={toggleShowMore}
+          className="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          {showMore ? "Show Less" : "Show More"}
+        </button>
+      </div>
 
       <div className="mt-12">
         <h3 className="text-2xl font-bold mb-4 text-center">Skills</h3>
         <div className="flex flex-wrap justify-center">
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            React.js
-          </span>
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            Tailwind CSS
-          </span>
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            JavaScript
-          </span>
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            HTML & CSS
-          </span>
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            Git
-          </span>
-          <span className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
-            TypeScript
-          </span>
+          {[
+            "React.js",
+            "Tailwind CSS",
+            "JavaScript",
+            "HTML & CSS",
+            "Git",
+            "TypeScript",
+          ].map((skill) => (
+            <span
+              key={skill}
+              className="m-2 p-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition"
+            >
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* <div className="mt-12">
-        <h3 className="text-2xl font-bold mb-4">Experience</h3>
-        <p className="text-lg text-gray-700 mb-4">
-          <strong>Front-End Developer</strong> at XYZ Company (2020 - Present)
-        </p>
-        <p className="text-lg text-gray-700 mb-4">
-          <strong>Web Developer Intern</strong> at ABC Corp (2019 - 2020)
-        </p>
-      </div> */}
-      <div className="mt-12">
-        <h3 className="text-2xl font-bold mb-4 text-center">Follow Me</h3>
-        <div className="flex justify-center space-x-4">
+      <div className="mt-12 text-center">
+        <h3 className="text-2xl font-bold mb-4">Follow Me</h3>
+        <div className="flex justify-center gap-6 text-xl">
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/habyarimana-caleb-517555285"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800"
+            className="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition"
           >
-            LinkedIn
+            <Linkedin size={20} /> LinkedIn
           </a>
           <a
-            href="https://github.com/yourprofile"
+            href="https://github.com/habyarimanacaleb"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-800 hover:text-gray-900"
+            className="flex items-center gap-1 text-gray-800 hover:text-gray-900 transition"
           >
-            GitHub
+            <Github size={20} /> GitHub
           </a>
           <a
             href="https://twitter.com/yourprofile"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-600"
+            className="flex items-center gap-1 text-blue-400 hover:text-blue-600 transition"
           >
-            Twitter
+            <Twitter size={20} /> Twitter
           </a>
         </div>
+      </div>
+
+      <div className="mt-10 text-center">
+        <a
+          href="https://docs.google.com/document/d/1VI7BdVxgoHcXpCeDhGMUx0Ds-ElOsV3tJMVFTlteiPU/edit?usp=sharing"
+          download
+          className="inline-flex items-center gap-2 bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition"
+        >
+          <FileDown size={18} /> Download CV
+        </a>
       </div>
     </div>
   );
