@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
             <FaTwitter />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/habyarimana-caleb-517555285/"
             className="text-2xl hover:text-blue-500 transition duration-300"
             aria-label="LinkedIn"
           >
