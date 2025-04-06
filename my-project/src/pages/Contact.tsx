@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaEnvelope, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -6,18 +7,28 @@ const Contact: React.FC = () => {
     email: "",
     message: "",
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError(""); // clear error as user types
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Message sent successfully");
+    if (!formData.name || !formData.email || !formData.message) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    setSubmitted(true);
     console.log("Form submitted:", formData);
-    (e.target as HTMLFormElement).reset(); // Handle email sending via service like EmailJS
+    (e.target as HTMLFormElement).reset();
+    setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setSubmitted(false), 4000); // Reset message
   };
 
   const phoneNumber = 250786015225;
@@ -26,49 +37,59 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-20 bg-white text-center">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-6">Contact Me</h2>
-        <p className="text-lg text-gray-700 mb-6">
+        <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
           Feel free to reach out to me for any inquiries, collaborations, or
-          just a chat. Click below to message me In Any Way You Preffer!
+          just a chat. Click below to message me in any way you prefer!
         </p>
-        <div className="flex justify-center">
+
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           <a
             href="mailto:calebhabyarimana1@gmail.com"
-            className="bg-blue-600  ml-4 text-white px-6 py-3 rounded hover:bg-blue-700"
+            className="flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700 transition-all shadow-md"
           >
-            Email Me
+            <FaEnvelope /> Email Me
           </a>
           <a
             href={linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 ml-4  text-white px-6 py-3 rounded hover:bg-blue-700"
+            className="flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700 transition-all shadow-md"
           >
-            Connect on LinkedIn
+            <FaLinkedin /> LinkedIn
           </a>
           <a
             href={`https://wa.me/${phoneNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 ml-4  text-white px-6 py-3 rounded hover:bg-blue-700"
+            className="flex items-center gap-2 bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700 transition-all shadow-md"
           >
-            Message me on WhatsApp
+            <FaWhatsapp /> WhatsApp
           </a>
         </div>
-        <div>
-          <p className="text-lg text-gray-700 mb-6 mt-6">OR</p>
-          <h1 className="text-3xl font-bold mb-6">Send me a message</h1>
-        </div>
-        <div className="mt-10 contact-form">
+
+        <p className="text-lg text-gray-700 mb-3">OR</p>
+        <h1 className="text-3xl font-bold mb-6">Send me a message</h1>
+
+        <div className="mt-6 max-w-xl mx-auto">
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg"
+            className="bg-white p-6 rounded-lg shadow-lg"
           >
-            <div className="mb-4">
+            {error && (
+              <p className="mb-4 text-red-600 font-semibold">{error}</p>
+            )}
+            {submitted && (
+              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                ✅ Your message was sent successfully!
+              </div>
+            )}
+
+            <div className="mb-4 text-left">
               <label
                 htmlFor="name"
-                className="block text-gray-700 font-semibold mb-2"
+                className="block text-gray-700 font-semibold mb-1"
               >
                 Your Name
               </label>
@@ -81,10 +102,10 @@ const Contact: React.FC = () => {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 text-left">
               <label
                 htmlFor="email"
-                className="block text-gray-700 font-semibold mb-2"
+                className="block text-gray-700 font-semibold mb-1"
               >
                 Your Email
               </label>
@@ -97,24 +118,28 @@ const Contact: React.FC = () => {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4 text-left">
               <label
                 htmlFor="message"
-                className="block text-gray-700 font-semibold mb-2"
+                className="block text-gray-700 font-semibold mb-1"
               >
                 Your Message
               </label>
               <textarea
                 name="message"
+                maxLength={500}
                 placeholder="Your Message"
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
               ></textarea>
+              <div className="text-right text-sm text-gray-500 mt-1">
+                {formData.message.length}/500
+              </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
             >
               Send Message
             </button>
